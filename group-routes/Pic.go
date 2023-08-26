@@ -21,13 +21,10 @@ func addPicRoutes(rg *gin.RouterGroup) {
 	pic.GET("/uploadfile", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "uploadImg.tmpl", gin.H{
 			"title": "图片上传",
-			// "content": bint,
-			// "tx": summary,
 		})
 	})
 
 	pic.GET("/upload", func(c *gin.Context) {
-
 		// Multipart form
 		form, _ := c.MultipartForm()
 		files := form.File["file"]

@@ -13,7 +13,7 @@ type BIN_TEST struct {
 	BData    []byte `gorm:"column:bData"`
 }
 
-type FileList struct {
+type FileData struct {
 	Id           string `gorm:"primaryKey;column:"id"`
 	FileName     string `gorm:"unique"`
 	FileData     string
