@@ -15,7 +15,7 @@
     {{ range $v := .content }}
     <tr height="30px">
       <td align="center" width="60px">{{ $v.Sampleid }}</td>
-      <td align="center" width="120px"><a href="/v1/pic/{{ $v.Sampleid }}" target="_blank">预览</a></td>
+      <td align="center" width="120px"><a href="/v1/pic/getpic/{{ $v.Sampleid }}" target="_blank">预览</a></td>
     </tr>
     {{ end }}
     </table>

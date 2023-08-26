@@ -17,6 +17,14 @@ func addPicRoutes(rg *gin.RouterGroup) {
 		c.JSON(http.StatusOK, "pic")
 	})
 
+	pic.GET("/uploadfile", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "uploadImg.tmpl", gin.H{
+			"title": "图片上传",
+			// "content": bint,
+			// "tx": summary,
+		})
+	})
+
 	pic.GET("/upload", func(c *gin.Context) {
 		c.JSON(http.StatusOK, "pic commit")
 	})
@@ -37,7 +45,7 @@ func addPicRoutes(rg *gin.RouterGroup) {
 		})
 	})
 
-	pic.GET("/:id", func(c *gin.Context) {
+	pic.GET("/getpic/:id", func(c *gin.Context) {
 		var p datab.Pg
 		dsn := p.DSN()
 		db, _ := gorm.Open(postgres.Open(dsn), &gorm.Config{})

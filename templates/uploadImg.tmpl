@@ -2,16 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Multiple file upload</title>
+    <title>{{ .title }}</title>
 </head>
+<style>
+body {
+  background-color: lightblue;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+}
+
+p {
+  font-family: PingFangSC-Regular;
+  font-size: 20px;
+}
+
+submit {
+  font-family: PingFangSC-Regular;
+  font-size: 32px;
+}
+
+</style>
 <body>
-<h1>Upload multiple files with fields</h1>
+<h1>{{ .title }}</h1>
+
+<p>可选择多个文件上传</p>
 
 <form action="/upload" method="post" enctype="multipart/form-data">
-    Name: <input type="text" name="name"><br>
-    Type: <input type="email" name="email"><br>
-    Files: <input type="file" name="files" multiple><br><br>
-    <input type="submit" value="Submit">
+    <table id="form">
+      <tr><td>Name:</td> <td><input type="text" name="name" id="name"></td></tr>
+      <tr><td>Email:</td> <td><input type="email" name="email" id="email"></td></tr>
+      <tr><td>Files:</td> <td><input type="file" name="files" id="files" multiple></td></tr>
+    </table>
+    <input id="submit" type="submit" value="上传">
 </form>
 </body>
 </html>

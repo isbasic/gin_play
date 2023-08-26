@@ -140,7 +140,7 @@ func GetUUID(hyphen bool) string {
 	uuid := strings.Replace(uuidWithHyphen.String(), "-", "", -1)
 
 	if hyphen {
-		return uuidWithHyphen
+		return uuidWithHyphen.String()
 	} else {
 		return uuid
 	}
