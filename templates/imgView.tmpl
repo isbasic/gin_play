@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .title }}</title>
+</head>
+  <body>
+  	<h1 align="center">
+  		{{ .title }}
+  	</h1>
+    <p align="center">{{ .tx }}</p>
+    <table align="center">
+    <tr><td align="center">序号</td><td align="center">图片</td></tr>
+    {{ range $v := .content }}
+    <tr>
+      <td align="center">{{ $v.Sampleid }}</td>
+      <td><img src="data:image/png;base64,{{ B64 $v.BData }}" width="240px"/></td>
+    </tr>
+    {{ end }}
+    </table>
+  </body>
+</html>

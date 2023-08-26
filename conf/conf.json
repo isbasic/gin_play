@@ -1,0 +1,10 @@
+{
+	"Alias":"mac",
+	"Host":"127.0.0.1",
+	"Port":5432,
+	"UserName":"mac",
+	"Passwd":"Yc_19860717",
+	"DBName":"mac",
+	"SSL":false,
+	"TimeZone":"Asia/Shanghai",
+}
