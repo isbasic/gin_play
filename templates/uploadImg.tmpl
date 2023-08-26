@@ -19,11 +19,16 @@ p {
   font-size: 20px;
 }
 
-submit {
+form {
   font-family: PingFangSC-Regular;
-  font-size: 32px;
+  font-size: 16px;
+  color:purple;
 }
 
+#name {
+  text-align:center;
+  color: red;
+}
 </style>
 <body>
 <h1>{{ .title }}</h1>
@@ -32,9 +37,9 @@ submit {
 
 <form action="/upload" method="post" enctype="multipart/form-data">
     <table id="form">
-      <tr><td>Name:</td> <td><input type="text" name="name" id="name"></td></tr>
-      <tr><td>Email:</td> <td><input type="email" name="email" id="email"></td></tr>
-      <tr><td>Files:</td> <td><input type="file" name="files" id="files" multiple></td></tr>
+      <tr><td id="name">Name:</td> <td><input type="text" name="name"></td></tr>
+      <tr><td>Email:</td> <td><input type="email" name="email"></td></tr>
+      <tr><td>Files:</td> <td><input type="file" name="files" multiple></td></tr>
     </table>
     <input id="submit" type="submit" value="上传">
 </form>

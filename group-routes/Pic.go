@@ -2,6 +2,7 @@ package routes
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -26,7 +27,20 @@ func addPicRoutes(rg *gin.RouterGroup) {
 	})
 
 	pic.GET("/upload", func(c *gin.Context) {
-		c.JSON(http.StatusOK, "pic commit")
+
+		// Multipart form
+		form, _ := c.MultipartForm()
+		files := form.File["file"]
+
+		for index, file := range files {
+			log.Println(file.Filename)
+			dst := fmt.Sprintf("C:/tmp/%s_%d", file.Filename, index)
+			// 上传文件到指定的目录
+			c.SaveUploadedFile(file, dst)
+		}
+		c.JSON(http.StatusOK, gin.H{
+			"message": fmt.Sprintf("%d files uploaded!", len(files)),
+		})
 	})
 
 	pic.GET("/list", func(c *gin.Context) {
