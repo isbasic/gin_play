@@ -24,7 +24,7 @@ func addPicRoutes(rg *gin.RouterGroup) {
 		})
 	})
 
-	pic.GET("/upload", func(c *gin.Context) {
+	pic.POST("/upload", func(c *gin.Context) {
 		// Multipart form
 		form, _ := c.MultipartForm()
 		files := form.File["file"]

@@ -4,10 +4,7 @@ import (
 	"encoding/base64"
 	"errors"
 	"fmt"
-	"io/ioutil"
-	"os"
 	"strings"
-	"time"
 
 	"github.com/golang/glog"
 	_ "github.com/google/uuid"

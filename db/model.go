@@ -23,7 +23,7 @@ type FileData struct {
 	UpdatedAt    time.Time `gorm:"autoUpdateTime:nano"`
 }
 
-func (fl *FileList) HasDB() bool {
+func (fl *FileData) HasDB() bool {
 	return false
 }
 
