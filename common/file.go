@@ -27,7 +27,7 @@ func GetDirBase(fp string) (string, error) {
 		base := filepath.Base(dir)
 		return base, err
 	} else {
-		e := errors.New(fmt.Sprintf("%s is not exists."))
+		e := errors.New(fmt.Sprintf("GetDirBase: %s is not exists."))
 		return "", e
 	}
 }

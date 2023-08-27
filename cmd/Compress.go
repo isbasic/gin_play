@@ -95,6 +95,8 @@ func CompressFile(fp string) (bool, error) {
 	_, cmdErr := cmd.CombinedOutput() // cmdResult,cmdError
 
 	if cmdErr != nil {
+		var e error
+		e = errors.New(fmt.Sprintf("cmd error: %s", cmdErr.Error()))
 		return false, cmdErr
 	}
 
