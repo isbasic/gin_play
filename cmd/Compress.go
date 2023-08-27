@@ -82,8 +82,15 @@ func CompressFile(fp string) (bool, error) {
 		return false, dstErr
 	}
 
+	var cmd *exec.Cmd
+	osName := common.GetOS()
+
 	// example:"{7z|7zz} a -sdel filename.7z filename"
-	cmd := exec.Command("cmd", "/C", GetSevenExecuteFileName(), "a", "-sdel", dst, src)
+	if osName == "windows" {
+		cmd = exec.Command("cmd", "/C", GetSevenExecuteFileName(), "a", "-sdel", dst, src)
+	} else {
+		cmd = exec.Command(GetSevenExecuteFileName(), "a", "-sdel", dst, src)
+	}
 
 	_, cmdErr := cmd.CombinedOutput() // cmdResult,cmdError
 

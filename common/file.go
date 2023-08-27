@@ -77,9 +77,14 @@ func DirScan(dir string, files chan<- string) {
 }
 
 func Dirents(dir string) []os.FileInfo {
-	entries, err := ioutil.ReadDir(dir)
+	var file string
+	file = dir
+	if !filepath.IsAbs(dir) {
+		file, _ = filepath.Abs(dir)
+	}
+	entries, err := ioutil.ReadDir(file)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "du1: %v\n", err)
+		fmt.Fprintf(os.Stderr, "common file Dirents: %v\n", err)
 		return nil
 	}
 	return entries
