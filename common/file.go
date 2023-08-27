@@ -2,7 +2,10 @@ package common
 
 import (
 	"errors"
+	"fmt"
+	"log"
 	"os"
+	"path/filepath"
 	"runtime"
 	"time"
 )
@@ -27,7 +30,7 @@ func GetFileTime(fp string) (time.Time, error) {
 	return res, err
 }
 
-func GetSep(osName ...string) string {
+func GetSep(osName string) string {
 	if osName != "" {
 		if osName == "windows" {
 			return "\\"
@@ -39,3 +42,23 @@ func GetSep(osName ...string) string {
 		return GetSep(o)
 	}
 }
+
+func DirScan(fp string) (map[string]string, error) {
+	var fl map[string]string
+	var e error
+
+	if Exist(fp) {
+		abs, err := filepath.Abs(fp)
+		fs := os.DirFS(fp)
+		filepath.WalkDir(fs,".",FWalkDir(path string,d os.DirEntry,e error){
+			if err != nil {
+            log.Fatal(err)
+        }
+        fmt.Println(path)
+        return nil
+		})
+	}
+
+	return fl, e
+}
+
