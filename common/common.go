@@ -4,6 +4,8 @@ import (
 	"encoding/base64"
 	"errors"
 	"fmt"
+	"path/filepath"
+	"runtime"
 	"strings"
 
 	"github.com/golang/glog"
@@ -46,4 +48,20 @@ func GetUUID(hyphen bool) string {
 	} else {
 		return uuid
 	}
+}
+
+func FloorCount(fp string, sep string) int64 {
+	var fileName string
+	fileName = fp
+
+	if !filepath.IsAbs(fileName) {
+		fileName, _ = filepath.Abs(fileName)
+	}
+
+	split := strings.Split(fileName, sep)
+	return int64(len(split))
+}
+
+func GetOS() string {
+	return runtime.GOOS
 }

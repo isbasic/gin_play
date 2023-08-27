@@ -3,7 +3,8 @@ package common
 import (
 	"errors"
 	"fmt"
-	"log"
+	"io/fs"
+	"io/ioutil"
 	"os"
 	"path/filepath"
 	"runtime"
@@ -14,6 +15,26 @@ func Exist(fp string) bool {
 	_, err := os.Stat(fp)
 
 	return os.IsExist(err)
+}
+
+func GetDirBase(fp string) (string, error) {
+	abs, err := filepath.Abs(fp)
+	if err != nil {
+		return "", err
+	}
+	if Exist(abs) {
+		dir := filepath.Dir(abs)
+		base := filepath.Base(dir)
+		return base, err
+	} else {
+		e := errors.New(fmt.Sprintf("%s is not exists."))
+		return "", e
+	}
+}
+
+func GetFileInfo(fp string) fs.FileInfo {
+	ff, _ := os.Stat(fp)
+	return ff
 }
 
 func GetFileTime(fp string) (time.Time, error) {
@@ -43,22 +64,23 @@ func GetSep(osName string) string {
 	}
 }
 
-func DirScan(fp string) (map[string]string, error) {
-	var fl map[string]string
-	var e error
+func DirScan(dir string, files chan<- string) {
+	for _, entry := range Dirents(dir) {
+		if entry.IsDir() {
+			subdir := filepath.Join(dir, entry.Name())
+			DirScan(subdir, files)
+		} else {
 
-	if Exist(fp) {
-		abs, err := filepath.Abs(fp)
-		fs := os.DirFS(fp)
-		filepath.WalkDir(fs,".",FWalkDir(path string,d os.DirEntry,e error){
-			if err != nil {
-            log.Fatal(err)
-        }
-        fmt.Println(path)
-        return nil
-		})
+			files <- filepath.Join(dir, entry.Name())
+		}
 	}
-
-	return fl, e
 }
 
+func Dirents(dir string) []os.FileInfo {
+	entries, err := ioutil.ReadDir(dir)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "du1: %v\n", err)
+		return nil
+	}
+	return entries
+}

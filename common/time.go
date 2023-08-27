@@ -6,7 +6,8 @@ import (
 )
 
 func FormatTime(t time.Time) string {
-	resTmpl := "%-4d%-2d%-2d"
+	resTmpl := "%04d%02d%02d%02d%02d%02d%09d" // yyyyMMddhhmmssnanosecond
 	y, m, d := t.Date()
-	return fmt.Sprintf(resTmpl, y, m, d)
+	h, mn, s, nano := t.Hour(), t.Minute(), t.Second(), t.Nanosecond()
+	return fmt.Sprintf(resTmpl, y, m, d, h, mn, s, nano)
 }

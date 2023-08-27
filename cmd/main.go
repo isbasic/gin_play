@@ -1,1 +1,1 @@
-package compress
+package cmd
