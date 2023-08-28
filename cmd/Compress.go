@@ -47,10 +47,10 @@ func MakeCompressName(fp string) (string, error) {
 	var res string
 	sep := "_"
 
-	// if !common.Exist(fp) {
-	// 	e = errors.New("MakeCompressName: File not exist.")
-	// 	return res, e
-	// }
+	if !common.Exist(fp) {
+		e = errors.New("MakeCompressName: File not exist.")
+		return res, e
+	}
 
 	fileTime, e := common.GetFileTime(fp)
 	if e != nil {

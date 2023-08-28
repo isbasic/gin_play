@@ -8,6 +8,7 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
+	"strings"
 	"time"
 )
 
@@ -66,6 +67,10 @@ func GetSep(osName string) string {
 
 func DirScan(dir string, files chan<- string) {
 	for _, entry := range Dirents(dir) {
+		name := strings.ToLower(entry.Name())
+		if strings.Contains(".ds_store") {
+			continue
+		}
 		if entry.IsDir() {
 			subdir := filepath.Join(dir, entry.Name())
 			DirScan(subdir, files)
