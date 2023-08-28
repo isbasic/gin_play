@@ -73,14 +73,17 @@ func CompressFile(fp string) (bool, error) {
 	if !filepath.IsAbs(src) {
 		src, e = filepath.Abs(src)
 		if e != nil {
-			return false, e
+			return false, errors.New(fmt.Sprintf("isabs: %s", e.Error()))
 		}
 	}
 
 	dst, dstErr := MakeCompressName(src)
+
 	if dstErr != nil {
 		return false, dstErr
 	}
+
+	fmt.Sprintf("CompressFile dst: %s", dst)
 
 	var cmd *exec.Cmd
 	osName := common.GetOS()
