@@ -14,7 +14,7 @@ import (
 func Exist(fp string) bool {
 	_, err := os.Stat(fp)
 
-	return os.IsExist(err)
+	return err == nil || os.IsExist(err)
 }
 
 func GetDirBase(fp string) (string, error) {
